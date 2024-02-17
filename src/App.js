@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
+import { v4 as uuidv4 } from "uuid";
+import { deleteFuncContext } from "./Context";
 
 function App() {
   const tasks = [
@@ -18,11 +20,19 @@ function App() {
       return;
     } else {
       setTasksList((tasks) => {
-        const newTaskList = [...tasks, { title: inputValue, completed: false }];
+        const newTaskList = [
+          ...tasks,
+          { id: uuidv4(), title: inputValue, completed: false },
+        ];
+        console.log(newTaskList);
         return newTaskList;
       });
       setInputValue("");
     }
+  };
+
+  const deleteTask = (id) => {
+    setTasksList((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
   return (
@@ -33,7 +43,9 @@ function App() {
         setInputValue={setInputValue}
         addTask={addTask}
       />
-      <TaskList tasksList={tasksList} />
+      <deleteFuncContext.Provider value={deleteTask}>
+        <TaskList tasksList={tasksList} />
+      </deleteFuncContext.Provider>
     </div>
   );
 }
