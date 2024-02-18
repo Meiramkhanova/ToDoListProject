@@ -7,8 +7,8 @@ export default function TaskList(props) {
 
   return (
     <div>
-      {props.tasksList.map((task) => {
-        return <TaskItem {...task} key={task.id} deleteTask={deleteTask} />;
+      {props.items.map((item) => {
+        return <TaskItem item={item} key={item.id} deleteTask={deleteTask} />;
       })}
     </div>
   );

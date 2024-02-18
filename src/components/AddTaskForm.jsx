@@ -7,13 +7,13 @@ function AddTaskForm(props) {
       <TextField
         variant="outlined"
         label="Add Task"
-        onChange={(e) => props.setInputValue(e.target.value)}
         value={props.inputValue}
+        onChange={(e) => props.setInputValue(e.target.value)}
       />
       <Button
         variant="contained"
         sx={{ width: "150px", marginTop: "15px" }}
-        onClick={props.addTask}
+        onClick={props.addItem}
       >
         Add Task
       </Button>
